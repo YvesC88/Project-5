@@ -62,7 +62,7 @@ class ViewController: UIViewController {
     @IBAction func tappedResetOperations(_ sender: UIButton) {
         textView.text = "0"
     }
-    func tappedOperations(_ sender: UIButton) {
+    func tappedOperator(_ sender: UIButton) {
         if canAddOperator {
             textView.text.append(" \(sender.title(for: .normal)!) ")
             } else {
@@ -72,16 +72,16 @@ class ViewController: UIViewController {
             }
     }
     @IBAction func tappedAdditionButton(_ sender: UIButton) {
-        tappedOperations(additionButton)
+        tappedOperator(additionButton)
     }
     @IBAction func tappedSubstractionButton(_ sender: UIButton) {
-        tappedOperations(substractionButton)
+        tappedOperator(substractionButton)
     }
     @IBAction func tappedMultiplyButton(_ sender: UIButton) {
-        tappedOperations(multiplyButton)
+        tappedOperator(multiplyButton)
     }
     @IBAction func tappedToDivideButton(_ sender: UIButton) {
-        tappedOperations(divideButton)
+        tappedOperator(divideButton)
     }
     @IBAction func tappedEqualButton(_ sender: UIButton) {
         guard expressionIsCorrect else {
