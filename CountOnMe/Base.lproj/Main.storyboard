@@ -182,7 +182,11 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
+<<<<<<< HEAD
                                             <action selector="tappedOperator:" destination="eqK-jh-KKu" eventType="touchUpInside" id="JqR-qo-h4i"/>
+=======
+                                            <action selector="tappedOperator:" destination="eqK-jh-KKu" eventType="touchUpInside" id="EKe-hd-S1u"/>
+>>>>>>> 672a1ba9a091d2066b898bcbe4c27dd7ca1d4e7f
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3zr-HC-0N9">
@@ -193,7 +197,11 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
+<<<<<<< HEAD
                                             <action selector="tappedOperator:" destination="eqK-jh-KKu" eventType="touchUpInside" id="TJz-Zz-gKL"/>
+=======
+                                            <action selector="tappedOperator:" destination="eqK-jh-KKu" eventType="touchUpInside" id="tw5-VY-bSk"/>
+>>>>>>> 672a1ba9a091d2066b898bcbe4c27dd7ca1d4e7f
                                         </connections>
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NQb-qA-pvZ">
@@ -204,7 +212,11 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
+<<<<<<< HEAD
                                             <action selector="tappedOperator:" destination="eqK-jh-KKu" eventType="touchUpInside" id="CI0-Eb-ZFK"/>
+=======
+                                            <action selector="tappedOperator:" destination="eqK-jh-KKu" eventType="touchUpInside" id="3U7-JX-c1f"/>
+>>>>>>> 672a1ba9a091d2066b898bcbe4c27dd7ca1d4e7f
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BMm-5C-9Iu">
@@ -215,7 +227,11 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
+<<<<<<< HEAD
                                             <action selector="tappedOperator:" destination="eqK-jh-KKu" eventType="touchUpInside" id="2IP-WL-b0h"/>
+=======
+                                            <action selector="tappedOperator:" destination="eqK-jh-KKu" eventType="touchUpInside" id="Vcx-hn-n0U"/>
+>>>>>>> 672a1ba9a091d2066b898bcbe4c27dd7ca1d4e7f
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qMj-Of-bCU">
