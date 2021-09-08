@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     @IBOutlet var substractionButton: UIButton!
     @IBOutlet var multiplyButton: UIButton!
     @IBOutlet var divideButton: UIButton!
+    
     let numberFormatter = NumberFormatter()
     var elements: [String] {
         return textView.text.split(separator: " ").map { "\($0)" }
@@ -30,7 +31,7 @@ class ViewController: UIViewController {
         return elements.count >= 3
     }
     var canAddOperator: Bool {
-        return elements.last != "+" && elements.last != "-"
+        return elements.last != "+" && elements.last != "-" && elements.last != "×" && elements.last != "÷"
     }
     var expressionHaveResult: Bool {
         return textView.text.firstIndex(of: "=") != nil
@@ -62,7 +63,7 @@ class ViewController: UIViewController {
     @IBAction func tappedResetOperations(_ sender: UIButton) {
         textView.text = "0"
     }
-    func tappedOperator(_ sender: UIButton) {
+    private func tappedOperator(_ sender: UIButton) {
         if canAddOperator {
             textView.text.append(" \(sender.title(for: .normal)!) ")
             } else {
@@ -103,10 +104,10 @@ class ViewController: UIViewController {
             let right = Double(operationsToReduce[2])!
             let result: Double
             switch operand {
-            case "+": result = Double(left + right)
-            case "-": result = Double(left - right)
-            case "×": result = Double(left * right)
-            case "÷": result = Double(left / right)
+            case "+": result = left + right
+            case "-": result = left - right
+            case "×": result = left * right
+            case "÷": result = left / right
             default: fatalError("Unknown operator !")
             }
             operationsToReduce = Array(operationsToReduce.dropFirst(3))
@@ -115,7 +116,6 @@ class ViewController: UIViewController {
         let resultNumber = NSNumber(value: Double(operationsToReduce.first!)!)
         let resultString = numberFormatter.string(from: resultNumber) ?? ""
         textView.text.append(" = \(resultString)")
-//        print(textView.text!)
     }
 }
 
