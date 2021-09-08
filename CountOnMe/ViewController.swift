@@ -64,7 +64,7 @@ class ViewController: UIViewController {
     }
     func tappedOperations(_ sender: UIButton) {
         if canAddOperator {
-            textView.text.append("\(sender)")
+            textView.text.append(" \(sender.title(for: .normal)!) ")
             } else {
                 let alertVC = UIAlertController(title: "Zéro!", message: "Un opérateur est déja mis !", preferredStyle: .alert)
                 alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
