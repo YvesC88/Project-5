@@ -63,7 +63,7 @@ class ViewController: UIViewController {
     @IBAction func tappedResetOperations(_ sender: UIButton) {
         textView.text = "0"
     }
-    private func tappedOperator(_ sender: UIButton) {
+    @IBAction func tappedOperator(_ sender: UIButton) {
         if canAddOperator {
             textView.text.append(" \(sender.title(for: .normal)!) ")
             } else {
@@ -71,18 +71,6 @@ class ViewController: UIViewController {
                 alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                 self.present(alertVC, animated: true, completion: nil)
             }
-    }
-    @IBAction func tappedAdditionButton(_ sender: UIButton) {
-        tappedOperator(additionButton)
-    }
-    @IBAction func tappedSubstractionButton(_ sender: UIButton) {
-        tappedOperator(substractionButton)
-    }
-    @IBAction func tappedMultiplyButton(_ sender: UIButton) {
-        tappedOperator(multiplyButton)
-    }
-    @IBAction func tappedToDivideButton(_ sender: UIButton) {
-        tappedOperator(divideButton)
     }
     @IBAction func tappedEqualButton(_ sender: UIButton) {
         guard expressionIsCorrect else {
