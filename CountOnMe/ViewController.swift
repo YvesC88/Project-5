@@ -103,5 +103,3 @@ class ViewController: UIViewController {
         textView.text.append(" = \(resultString)")
     }
 }
-
-
