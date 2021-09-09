@@ -31,13 +31,13 @@
       "size" : "40x40"
     },
     {
-      "filename" : "CountOnMeIconAppx120.png",
+      "filename" : "iphoneapp_calc_120.jpg",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "60x60"
     },
     {
-      "filename" : "CountOnMeIconAppx180.png",
+      "filename" : "iphoneapp_calc_180.jpg",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "60x60"
@@ -88,6 +88,7 @@
       "size" : "83.5x83.5"
     },
     {
+      "filename" : "iconapp_calc.jpg",
       "idiom" : "ios-marketing",
       "scale" : "1x",
       "size" : "1024x1024"

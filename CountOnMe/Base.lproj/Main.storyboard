@@ -12,10 +12,6 @@
         <scene sceneID="BSq-PH-znu">
             <objects>
                 <viewController id="eqK-jh-KKu" customClass="ViewController" customModule="CountOnMe" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="tQO-Y2-VWE"/>
-                        <viewControllerLayoutGuide type="bottom" id="Fhl-dE-gDl"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="eIh-hr-C95">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -182,11 +178,7 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-<<<<<<< HEAD
-                                            <action selector="tappedOperator:" destination="eqK-jh-KKu" eventType="touchUpInside" id="JqR-qo-h4i"/>
-=======
                                             <action selector="tappedOperator:" destination="eqK-jh-KKu" eventType="touchUpInside" id="EKe-hd-S1u"/>
->>>>>>> 672a1ba9a091d2066b898bcbe4c27dd7ca1d4e7f
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3zr-HC-0N9">
@@ -197,11 +189,7 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-<<<<<<< HEAD
-                                            <action selector="tappedOperator:" destination="eqK-jh-KKu" eventType="touchUpInside" id="TJz-Zz-gKL"/>
-=======
                                             <action selector="tappedOperator:" destination="eqK-jh-KKu" eventType="touchUpInside" id="tw5-VY-bSk"/>
->>>>>>> 672a1ba9a091d2066b898bcbe4c27dd7ca1d4e7f
                                         </connections>
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NQb-qA-pvZ">
@@ -212,11 +200,7 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-<<<<<<< HEAD
-                                            <action selector="tappedOperator:" destination="eqK-jh-KKu" eventType="touchUpInside" id="CI0-Eb-ZFK"/>
-=======
                                             <action selector="tappedOperator:" destination="eqK-jh-KKu" eventType="touchUpInside" id="3U7-JX-c1f"/>
->>>>>>> 672a1ba9a091d2066b898bcbe4c27dd7ca1d4e7f
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BMm-5C-9Iu">
@@ -227,11 +211,7 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-<<<<<<< HEAD
-                                            <action selector="tappedOperator:" destination="eqK-jh-KKu" eventType="touchUpInside" id="2IP-WL-b0h"/>
-=======
                                             <action selector="tappedOperator:" destination="eqK-jh-KKu" eventType="touchUpInside" id="Vcx-hn-n0U"/>
->>>>>>> 672a1ba9a091d2066b898bcbe4c27dd7ca1d4e7f
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qMj-Of-bCU">
@@ -251,18 +231,18 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="AWJ-Vl-uau"/>
+                        <viewLayoutGuide key="safeArea" id="UhH-9w-0YA"/>
                         <color key="backgroundColor" red="0.87536688539999996" green="0.84808511389999996" blue="0.83804947389999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="T2H-yn-nBB" firstAttribute="leading" secondItem="AWJ-Vl-uau" secondAttribute="leading" constant="20" id="8WK-d1-cQe"/>
-                            <constraint firstItem="isI-Gg-Iye" firstAttribute="leading" secondItem="AWJ-Vl-uau" secondAttribute="leading" constant="20" id="9Zy-zq-55b"/>
-                            <constraint firstItem="AWJ-Vl-uau" firstAttribute="trailing" secondItem="isI-Gg-Iye" secondAttribute="trailing" constant="20" id="GXI-aI-aSy"/>
-                            <constraint firstItem="ogr-Aw-e1h" firstAttribute="leading" secondItem="AWJ-Vl-uau" secondAttribute="leading" constant="20" id="GZ2-He-Wdg"/>
+                            <constraint firstItem="T2H-yn-nBB" firstAttribute="leading" secondItem="UhH-9w-0YA" secondAttribute="leading" constant="20" id="8WK-d1-cQe"/>
+                            <constraint firstItem="isI-Gg-Iye" firstAttribute="leading" secondItem="UhH-9w-0YA" secondAttribute="leading" constant="20" id="9Zy-zq-55b"/>
+                            <constraint firstItem="UhH-9w-0YA" firstAttribute="trailing" secondItem="isI-Gg-Iye" secondAttribute="trailing" constant="20" id="GXI-aI-aSy"/>
+                            <constraint firstItem="ogr-Aw-e1h" firstAttribute="leading" secondItem="UhH-9w-0YA" secondAttribute="leading" constant="20" id="GZ2-He-Wdg"/>
                             <constraint firstItem="isI-Gg-Iye" firstAttribute="top" secondItem="T2H-yn-nBB" secondAttribute="bottom" constant="30" id="MHA-BV-uei"/>
-                            <constraint firstItem="Fhl-dE-gDl" firstAttribute="top" secondItem="ogr-Aw-e1h" secondAttribute="bottom" constant="8" id="gLp-QI-2Av"/>
-                            <constraint firstItem="T2H-yn-nBB" firstAttribute="top" secondItem="AWJ-Vl-uau" secondAttribute="top" constant="15" id="jD8-vy-c0W"/>
-                            <constraint firstItem="AWJ-Vl-uau" firstAttribute="trailing" secondItem="ogr-Aw-e1h" secondAttribute="trailing" constant="20" id="mD3-lW-zbE"/>
-                            <constraint firstItem="AWJ-Vl-uau" firstAttribute="trailing" secondItem="T2H-yn-nBB" secondAttribute="trailing" constant="20" id="uGv-Bb-cyI"/>
+                            <constraint firstItem="UhH-9w-0YA" firstAttribute="bottom" secondItem="ogr-Aw-e1h" secondAttribute="bottom" constant="8" id="gLp-QI-2Av"/>
+                            <constraint firstItem="T2H-yn-nBB" firstAttribute="top" secondItem="UhH-9w-0YA" secondAttribute="top" constant="15" id="jD8-vy-c0W"/>
+                            <constraint firstItem="UhH-9w-0YA" firstAttribute="trailing" secondItem="ogr-Aw-e1h" secondAttribute="trailing" constant="20" id="mD3-lW-zbE"/>
+                            <constraint firstItem="UhH-9w-0YA" firstAttribute="trailing" secondItem="T2H-yn-nBB" secondAttribute="trailing" constant="20" id="uGv-Bb-cyI"/>
                         </constraints>
                     </view>
                     <connections>
