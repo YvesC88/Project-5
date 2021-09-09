@@ -102,7 +102,4 @@ class ViewController: UIViewController {
         let resultString = numberFormatter.string(from: resultNumber) ?? ""
         textView.text.append(" = \(resultString)")
     }
-    func priorityOperator() {
-        
-    }
 }
