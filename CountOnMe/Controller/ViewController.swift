@@ -39,20 +39,15 @@ class ViewController: UIViewController {
     }
     // View actions
     @IBAction func tappedNumberButton(_ sender: UIButton) {
-        algorithm.tappedNumber([numberButtons])
+        algorithm.tappedNumber(sender)
     }
-    @IBAction func tappedResetOperations(_ sender: UIButton) {
-        algorithm.reset()
+    @IBAction func tappedResetOperations() {
+        algorithm.reset(resetOperations)
     }
     @IBAction func tappedOperator(_ sender: UIButton) {
         algorithm.symbolOperator(multiplyButton)
     }
     @IBAction func tappedEqualButton(_ sender: UIButton) {
         algorithm.calculate()
-    }
-    func showResult() {
-        let resultNumber = NSNumber(value: Double(operationsToReduce.first!)!)
-        let resultString = numberFormatter.string(from: resultNumber) ?? ""
-        textView.text.append(" = \(resultString)")
     }
 }
