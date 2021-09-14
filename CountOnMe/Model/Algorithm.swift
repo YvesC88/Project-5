@@ -7,9 +7,15 @@
 //
 
 import Foundation
-import UIKit
+
+protocol AlgorithmDelegate: AnyObject {
+    func showAlert(title: String?, message: String?)
+    func appendText(text: String)
+}
 
 class Algorithm {
+    
+    var delegate: AlgorithmDelegate?
     
     // Error check computed variables
     var expressionHaveEnoughElement: Bool {
@@ -17,10 +23,10 @@ class Algorithm {
     }
     
     var expressionHaveResult: Bool {
-        return textView.text.firstIndex(of: "=") != nil
+        return delegate?.appendText(text: "=") != nil
     }
     var expressionIsEmpty: Bool {
-        return textView.text == "0"
+        return delegate?.appendText(text: "0") != nil
     }
     var elements: [String] {
         return textView.text.split(separator: " ").map { "\($0)" }
@@ -28,37 +34,32 @@ class Algorithm {
     var canAddOperator: Bool {
         return elements.last != "+" && elements.last != "-" && elements.last != "×" && elements.last != "÷"
     }
-    var textView: UITextView!
     
     func error() {
         guard canAddOperator else {
-            let alertVC = UIAlertController(title: "Zéro!", message: "Entrez une expression correcte !", preferredStyle: .alert)
-            alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-            return self.present(alertVC, animated: true, completion: nil)
+            delegate?.showAlert(title: "Zéro !", message: "Entrez une expression correcte !")
+            return
         }
         guard expressionHaveEnoughElement else {
-            let alertVC = UIAlertController(title: "Zéro!", message: "Démarrez un nouveau calcul !", preferredStyle: .alert)
-            alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-            return self.present(alertVC, animated: true, completion: nil)
+            delegate?.showAlert(title: "Zéro", message: "Démarrez un nouveau calcul !")
+            return
         }
     }
-    func symbolOperator(_ sender: UIButton) {
+    func symbolOperator(operatorTitle: String) {
         if canAddOperator {
-            textView.text.append(" \(sender.title(for: .normal)!) ")
+            delegate?.appendText(text: " \(operatorTitle) ")
         } else {
-            let alertVC = UIAlertController(title: "Zéro!", message: "Un opérateur est déja mis !", preferredStyle: .alert)
-            alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-            self.present(alertVC, animated: true, completion: nil)
+            delegate?.showAlert(title: "Zéro !", message: "Un opérateur est déjà mis !")
         }
     }
-    func tappedNumber(_ sender: UIButton) {
-        guard let numberText = sender.title(for: .normal) else {
+    func tappedNumber(numberTitle: String) {
+        guard let numberText = delegate?.appendText(text: " \(numberTitle) ") else {
             return
         }
         if expressionHaveResult || expressionIsEmpty {
-            textView.text = ""
+            delegate?.appendText(text: "")
         }
-        textView.text.append(numberText)
+        delegate?.appendText(text: "\(numberText)")
     }
     func calculate() {
         // Create local copy of operations
@@ -81,10 +82,10 @@ class Algorithm {
         }
         let resultNumber = NSNumber(value: Double(operationsToReduce.first!)!)
         let resultString = numberFormatter.string(from: resultNumber) ?? ""
-        textView.text.append(" = \(resultString)")
+        delegate?.appendText(text: "= \(resultString)")
     }
-    func reset(_ sender: UIButton) {
-        textView.text = "0"
+    func reset() {
+        delegate?.appendText(text: "0")
     }
     func priorityCalculate() {
         
