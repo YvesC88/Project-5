@@ -40,7 +40,7 @@ class ViewController: UIViewController {
     @IBAction func tappedNumberButton(_ sender: UIButton) {
         algorithm.tappedNumber(numberTitle: sender.title(for: .normal)!)
     }
-    @IBAction func tappedResetOperations() {
+    @IBAction func tappedResetOperations(_ sender: UIButton) {
         algorithm.reset()
     }
     @IBAction func tappedOperator(_ sender: UIButton) {
