@@ -11,11 +11,14 @@ import Foundation
 protocol AlgorithmDelegate: AnyObject {
     func showAlert(title: String?, message: String?)
     func appendText(text: String)
+    func resetText(text: String)
 }
 
 class Algorithm {
     
     var delegate: AlgorithmDelegate?
+    var textView: String = ""
+    var numberFormatter = NumberFormatter()
     
     // Error check computed variables
     var expressionHaveEnoughElement: Bool {
@@ -23,13 +26,13 @@ class Algorithm {
     }
     
     var expressionHaveResult: Bool {
-        return delegate?.appendText(text: "=") != nil
+        return textView.firstIndex(of: "=") != nil
     }
     var expressionIsEmpty: Bool {
-        return delegate?.appendText(text: "0") != nil
+        return textView == "0"
     }
     var elements: [String] {
-        return textView.text.split(separator: " ").map { "\($0)" }
+        return textView.split(separator: " ").map { "\($0)" }
     }
     var canAddOperator: Bool {
         return elements.last != "+" && elements.last != "-" && elements.last != "×" && elements.last != "÷"
@@ -52,14 +55,14 @@ class Algorithm {
             delegate?.showAlert(title: "Zéro !", message: "Un opérateur est déjà mis !")
         }
     }
-    func tappedNumber(numberTitle: String) {
-        guard let numberText = delegate?.appendText(text: " \(numberTitle) ") else {
+    func tappedNumber(textNumber: String) {
+        guard (delegate?.appendText(text: "\(textNumber)")) != nil else {
             return
         }
         if expressionHaveResult || expressionIsEmpty {
             delegate?.appendText(text: "")
         }
-        delegate?.appendText(text: "\(numberText)")
+        textView.append(textNumber)
     }
     func calculate() {
         // Create local copy of operations
@@ -69,7 +72,7 @@ class Algorithm {
             let left = Double(operationsToReduce[0])!
             let operand = operationsToReduce[1]
             let right = Double(operationsToReduce[2])!
-            let result: Double
+            var result: Double
             switch operand {
             case "+": result = left + right
             case "-": result = left - right
@@ -82,10 +85,10 @@ class Algorithm {
         }
         let resultNumber = NSNumber(value: Double(operationsToReduce.first!)!)
         let resultString = numberFormatter.string(from: resultNumber) ?? ""
-        delegate?.appendText(text: "= \(resultString)")
+        textView.append(" = \(resultString)")
     }
     func reset() {
-        delegate?.appendText(text: "0")
+        delegate?.resetText(text: "")
     }
     func priorityCalculate() {
         

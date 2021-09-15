@@ -38,7 +38,7 @@ class ViewController: UIViewController {
     }
     // View actions
     @IBAction func tappedNumberButton(_ sender: UIButton) {
-        algorithm.tappedNumber(numberTitle: sender.title(for: .normal)!)
+        algorithm.tappedNumber(textNumber: sender.title(for: .normal)!)
     }
     @IBAction func tappedResetOperations(_ sender: UIButton) {
         algorithm.reset()
@@ -52,6 +52,10 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: AlgorithmDelegate {
+    func resetText(text: String) {
+        textView.text = "0"
+    }
+    
     func showAlert(title: String?, message: String?) {
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
