@@ -17,10 +17,7 @@ class ViewController: UIViewController {
     @IBOutlet var textView: UITextView!
     @IBOutlet var numberButtons: [UIButton]!
     @IBOutlet var resetOperations: UIButton!
-    @IBOutlet var additionButton: UIButton!
-    @IBOutlet var substractionButton: UIButton!
-    @IBOutlet var multiplyButton: UIButton!
-    @IBOutlet var divideButton: UIButton!
+    @IBOutlet var symbolOperator: [UIButton]!
     
     
     // View Life cycles
