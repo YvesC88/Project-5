@@ -85,7 +85,7 @@ class Algorithm {
         }
         let resultNumber = NSNumber(value: Double(operationsToReduce.first!)!)
         let resultString = numberFormatter.string(from: resultNumber) ?? ""
-        textView.append(" = \(resultString)")
+        textView.append("\(resultString)")
     }
     func reset() {
         delegate?.resetText(text: "")
