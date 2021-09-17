@@ -12,12 +12,10 @@ import UIKit
 class ViewController: UIViewController {
     
     private var algorithm = Algorithm()
-    private let numberFormatter = NumberFormatter()
     
     @IBOutlet var textView: UITextView!
     @IBOutlet var numberButtons: [UIButton]!
     @IBOutlet var resetOperations: UIButton!
-    @IBOutlet var symbolsOperator: [UIButton]!
     
     // View Life cycles
     override func viewDidLoad() {
@@ -49,10 +47,6 @@ extension ViewController: AlgorithmDelegate {
     }
     
     func appendText(text: String) {
-        textView.text.append(text)
-    }
-    
-    func resetText(text: String) {
         textView.text = text
     }
 }

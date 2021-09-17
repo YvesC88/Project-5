@@ -11,7 +11,6 @@ import Foundation
 protocol AlgorithmDelegate: AnyObject {
     func showAlert(title: String?, message: String?)
     func appendText(text: String)
-    func resetText(text: String)
 }
 
 class Algorithm {
@@ -37,9 +36,6 @@ class Algorithm {
         return elements.last != "+" && elements.last != "-" && elements.last != "×" && elements.last != "÷"
     }
     
-    func error() {
-        
-    }
     func symbolOperator(operatorTitle: String) {
         if canAddOperator {
             textView.append(" \(operatorTitle) ")
@@ -49,13 +45,11 @@ class Algorithm {
         }
     }
     func tappedNumber(textNumber: String) {
-        guard (delegate?.appendText(text: "\(textNumber)")) != nil else {
-            return
-        }
         if expressionHaveResult || expressionIsEmpty {
-            delegate?.appendText(text: "")
+            delegate?.appendText(text: "\(textNumber)")
         }
         textView.append("\(textNumber)")
+        delegate?.appendText(text: "\(textNumber)")
     }
     func calculate() {
         guard canAddOperator else {
@@ -90,15 +84,14 @@ class Algorithm {
             operationsToReduce = Array(operationsToReduce.dropFirst(3))
             operationsToReduce.insert("\(result)", at: 0)
         }
-        
         let resultNumber = NSNumber(value: Double(operationsToReduce.first!)!)
         let resultString = numberFormatter.string(from: resultNumber) ?? ""
-        delegate?.appendText(text: " = \(resultString)")
+        delegate?.appendText(text: " \(resultString)")
     }
     
     func reset() {
         textView.removeAll()
-        delegate?.resetText(text: "0")
+        delegate?.appendText(text: "0")
     }
     func priorityCalculate() {
         
