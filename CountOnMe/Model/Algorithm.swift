@@ -11,7 +11,7 @@ import Foundation
 protocol AlgorithmDelegate: AnyObject {
     func showAlert(title: String?, message: String?)
     func appendText(text: String)
-    func resetText()
+    func resetText(text: String)
 }
 
 class Algorithm {
@@ -38,21 +38,14 @@ class Algorithm {
     }
     
     func error() {
-        guard canAddOperator else {
-            delegate?.showAlert(title: "Zéro !", message: "Entrez une expression correcte !")
-            return
-        }
-        guard expressionHaveEnoughElement else {
-            delegate?.showAlert(title: "Zéro", message: "Démarrez un nouveau calcul !")
-            return
-        }
+        
     }
     func symbolOperator(operatorTitle: String) {
         if canAddOperator {
             textView.append(" \(operatorTitle) ")
             delegate?.appendText(text: " \(operatorTitle) ")
         } else {
-            delegate?.showAlert(title: "Zéro !", message: "Un opérateur est déjà mis !")
+            delegate?.showAlert(title: "Erreur", message: "Un opérateur est déjà mis !")
         }
     }
     func tappedNumber(textNumber: String) {
@@ -65,6 +58,14 @@ class Algorithm {
         textView.append("\(textNumber)")
     }
     func calculate() {
+        guard canAddOperator else {
+            delegate?.showAlert(title: "Erreur", message: "Entrez une expression correcte !")
+            return
+        }
+        guard expressionHaveEnoughElement else {
+            delegate?.showAlert(title: "Erreur", message: "Démarrez un nouveau calcul !")
+            return
+        }
         numberFormatter.minimumFractionDigits = 0
         numberFormatter.maximumFractionDigits = 4
         numberFormatter.usesSignificantDigits = true
@@ -97,7 +98,7 @@ class Algorithm {
     
     func reset() {
         textView.removeAll()
-        delegate?.resetText()
+        delegate?.resetText(text: "0")
     }
     func priorityCalculate() {
         

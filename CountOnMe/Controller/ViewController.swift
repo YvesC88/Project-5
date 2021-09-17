@@ -36,7 +36,6 @@ class ViewController: UIViewController {
         algorithm.symbolOperator(operatorTitle: sender.title(for: .normal)!)
     }
     @IBAction func tappedEqualButton(_ sender: UIButton) {
-        algorithm.error()
         algorithm.calculate()
     }
 }
@@ -53,7 +52,7 @@ extension ViewController: AlgorithmDelegate {
         textView.text.append(text)
     }
     
-    func resetText() {
-        textView.text = "0"
+    func resetText(text: String) {
+        textView.text = text
     }
 }
