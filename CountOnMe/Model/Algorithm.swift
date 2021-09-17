@@ -17,22 +17,21 @@ protocol AlgorithmDelegate: AnyObject {
 class Algorithm {
     
     var delegate: AlgorithmDelegate?
-    var text: String = ""
+    var textView: String = ""
     var numberFormatter = NumberFormatter()
-    
     // Error check computed variables
     var expressionHaveEnoughElement: Bool {
         return elements.count >= 3
     }
     
     var expressionHaveResult: Bool {
-        return text.firstIndex(of: "=") != nil
+        return textView.firstIndex(of: "=") != nil
     }
     var expressionIsEmpty: Bool {
-        return text == "0"
+        return textView == "0"
     }
     var elements: [String] {
-        return text.split(separator: " ").map { "\($0)" }
+        return textView.split(separator: " ").map { "\($0)" }
     }
     var canAddOperator: Bool {
         return elements.last != "+" && elements.last != "-" && elements.last != "×" && elements.last != "÷"
@@ -50,6 +49,7 @@ class Algorithm {
     }
     func symbolOperator(operatorTitle: String) {
         if canAddOperator {
+            textView.append(" \(operatorTitle) ")
             delegate?.appendText(text: " \(operatorTitle) ")
         } else {
             delegate?.showAlert(title: "Zéro !", message: "Un opérateur est déjà mis !")
@@ -62,9 +62,15 @@ class Algorithm {
         if expressionHaveResult || expressionIsEmpty {
             delegate?.appendText(text: "")
         }
-        text.append("\(textNumber)")
+        textView.append("\(textNumber)")
     }
     func calculate() {
+        numberFormatter.minimumFractionDigits = 0
+        numberFormatter.maximumFractionDigits = 4
+        numberFormatter.usesSignificantDigits = true
+        numberFormatter.alwaysShowsDecimalSeparator = false
+        numberFormatter.allowsFloats = true
+        numberFormatter.numberStyle = .decimal
         // Create local copy of operations
         var operationsToReduce = elements
         // Iterate over operations while an operand still here
@@ -83,13 +89,14 @@ class Algorithm {
             operationsToReduce = Array(operationsToReduce.dropFirst(3))
             operationsToReduce.insert("\(result)", at: 0)
         }
+        
         let resultNumber = NSNumber(value: Double(operationsToReduce.first!)!)
         let resultString = numberFormatter.string(from: resultNumber) ?? ""
         delegate?.appendText(text: " = \(resultString)")
     }
     
     func reset() {
-        text.removeAll()
+        textView.removeAll()
         delegate?.resetText()
     }
     func priorityCalculate() {

@@ -24,13 +24,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         algorithm.delegate = self
-        
-        numberFormatter.minimumFractionDigits = 0
-        numberFormatter.maximumFractionDigits = 4
-        numberFormatter.usesSignificantDigits = true
-        numberFormatter.alwaysShowsDecimalSeparator = false
-        numberFormatter.allowsFloats = true
-        numberFormatter.numberStyle = .decimal
     }
     // View actions
     @IBAction func tappedNumberButton(_ sender: UIButton) {
@@ -43,6 +36,7 @@ class ViewController: UIViewController {
         algorithm.symbolOperator(operatorTitle: sender.title(for: .normal)!)
     }
     @IBAction func tappedEqualButton(_ sender: UIButton) {
+        algorithm.error()
         algorithm.calculate()
     }
 }
