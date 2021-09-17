@@ -17,8 +17,7 @@ class ViewController: UIViewController {
     @IBOutlet var textView: UITextView!
     @IBOutlet var numberButtons: [UIButton]!
     @IBOutlet var resetOperations: UIButton!
-    @IBOutlet var symbolOperator: [UIButton]!
-    
+    @IBOutlet var symbolsOperator: [UIButton]!
     
     // View Life cycles
     override func viewDidLoad() {
@@ -49,9 +48,6 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: AlgorithmDelegate {
-    func resetText(text: String) {
-        textView.text = "0"
-    }
     
     func showAlert(title: String?, message: String?) {
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -61,5 +57,9 @@ extension ViewController: AlgorithmDelegate {
     
     func appendText(text: String) {
         textView.text.append(text)
+    }
+    
+    func resetText() {
+        textView.text = "0"
     }
 }

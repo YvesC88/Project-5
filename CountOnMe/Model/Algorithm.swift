@@ -11,13 +11,13 @@ import Foundation
 protocol AlgorithmDelegate: AnyObject {
     func showAlert(title: String?, message: String?)
     func appendText(text: String)
-    func resetText(text: String)
+    func resetText()
 }
 
 class Algorithm {
     
     var delegate: AlgorithmDelegate?
-    var textView: String = ""
+    var text: String = ""
     var numberFormatter = NumberFormatter()
     
     // Error check computed variables
@@ -26,13 +26,13 @@ class Algorithm {
     }
     
     var expressionHaveResult: Bool {
-        return textView.firstIndex(of: "=") != nil
+        return text.firstIndex(of: "=") != nil
     }
     var expressionIsEmpty: Bool {
-        return textView == "0"
+        return text == "0"
     }
     var elements: [String] {
-        return textView.split(separator: " ").map { "\($0)" }
+        return text.split(separator: " ").map { "\($0)" }
     }
     var canAddOperator: Bool {
         return elements.last != "+" && elements.last != "-" && elements.last != "×" && elements.last != "÷"
@@ -62,7 +62,7 @@ class Algorithm {
         if expressionHaveResult || expressionIsEmpty {
             delegate?.appendText(text: "")
         }
-        textView.append(textNumber)
+        text.append("\(textNumber)")
     }
     func calculate() {
         // Create local copy of operations
@@ -85,10 +85,12 @@ class Algorithm {
         }
         let resultNumber = NSNumber(value: Double(operationsToReduce.first!)!)
         let resultString = numberFormatter.string(from: resultNumber) ?? ""
-        textView.append("\(resultString)")
+        delegate?.appendText(text: " = \(resultString)")
     }
+    
     func reset() {
-        delegate?.resetText(text: "")
+        text.removeAll()
+        delegate?.resetText()
     }
     func priorityCalculate() {
         

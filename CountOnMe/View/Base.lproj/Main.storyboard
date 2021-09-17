@@ -258,10 +258,10 @@
                         <outletCollection property="numberButtons" destination="W04-n1-Wen" collectionClass="NSMutableArray" id="F9G-eA-4ij"/>
                         <outletCollection property="numberButtons" destination="EPx-3X-zTa" collectionClass="NSMutableArray" id="tmM-9D-IHt"/>
                         <outletCollection property="numberButtons" destination="Hkr-13-i1X" collectionClass="NSMutableArray" id="Cn1-3U-qap"/>
-                        <outletCollection property="symbolOperator" destination="DQU-P5-55X" collectionClass="NSMutableArray" id="WDL-Jk-Qbx"/>
-                        <outletCollection property="symbolOperator" destination="3zr-HC-0N9" collectionClass="NSMutableArray" id="4WW-aW-6AX"/>
-                        <outletCollection property="symbolOperator" destination="NQb-qA-pvZ" collectionClass="NSMutableArray" id="Sph-pB-69J"/>
-                        <outletCollection property="symbolOperator" destination="BMm-5C-9Iu" collectionClass="NSMutableArray" id="FT6-C2-B5T"/>
+                        <outletCollection property="symbolsOperator" destination="DQU-P5-55X" collectionClass="NSMutableArray" id="25f-Bm-l1x"/>
+                        <outletCollection property="symbolsOperator" destination="3zr-HC-0N9" collectionClass="NSMutableArray" id="ErQ-hy-1gK"/>
+                        <outletCollection property="symbolsOperator" destination="NQb-qA-pvZ" collectionClass="NSMutableArray" id="85o-YK-zqa"/>
+                        <outletCollection property="symbolsOperator" destination="BMm-5C-9Iu" collectionClass="NSMutableArray" id="Qv9-kq-Yhc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7XP-3c-sJZ" sceneMemberID="firstResponder"/>
