@@ -35,11 +35,13 @@ class Algorithm {
     var canAddOperator: Bool {
         return elements.last != "+" && elements.last != "-" && elements.last != "×" && elements.last != "÷"
     }
+    func error() {
+    }
     
     func symbolOperator(operatorTitle: String) {
         if canAddOperator {
             textView.append(" \(operatorTitle) ")
-            delegate?.appendText(text: " \(operatorTitle) ")
+            delegate?.appendText(text: " \(textView) ")
         } else {
             delegate?.showAlert(title: "Erreur", message: "Un opérateur est déjà mis !")
         }
@@ -49,7 +51,7 @@ class Algorithm {
             delegate?.appendText(text: "\(textNumber)")
         }
         textView.append("\(textNumber)")
-        delegate?.appendText(text: "\(textNumber)")
+        delegate?.appendText(text: "\(textView)")
     }
     func calculate() {
         guard canAddOperator else {
