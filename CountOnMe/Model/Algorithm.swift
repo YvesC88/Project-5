@@ -86,8 +86,13 @@ class Algorithm {
         }
         let resultNumber = NSNumber(value: Double(operationsToReduce.first!)!)
         let resultString = numberFormatter.string(from: resultNumber) ?? ""
-        text += " = \(resultString)"
-        delegate?.appendText(text: "\(resultString)")
+        if text.contains("÷ 0") {
+            delegate?.showAlert(title: "Erreur", message: "Impossible !")
+            reset()
+        } else {
+            text += " = \(resultString)"
+            delegate?.appendText(text: "\(resultString)")
+        }
     }
     func reset() {
         text = ""
