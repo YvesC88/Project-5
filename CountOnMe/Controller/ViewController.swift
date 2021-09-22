@@ -20,7 +20,6 @@ class ViewController: UIViewController {
     // View Life cycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         algorithm.delegate = self
     }
     // View actions
@@ -34,6 +33,7 @@ class ViewController: UIViewController {
         algorithm.symbolOperator(operatorTitle: sender.title(for: .normal)!)
     }
     @IBAction func tappedEqualButton(_ sender: UIButton) {
+        algorithm.decimalNumber()
         algorithm.calculate()
     }
 }

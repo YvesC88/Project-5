@@ -18,9 +18,9 @@ class AlgorithmTestCase: XCTestCase {
     }
     
     func testGivenCalculate_WhenAddNumber_ThenResult() {
-        algorithm.calculate()
+        algorithm.text = "5 x 2"
         
-        XCTAssert(true)
+        XCTAssert(algorithm.text == "5 x 2 = 10")
         
     }
     func testGivenCalculate_WhenSubstractNumber_ThenResult() {

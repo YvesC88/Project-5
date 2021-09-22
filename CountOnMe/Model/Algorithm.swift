@@ -16,42 +16,42 @@ protocol AlgorithmDelegate: AnyObject {
 class Algorithm {
     
     var delegate: AlgorithmDelegate?
-    var textView: String = ""
+    var text: String = ""
     var numberFormatter = NumberFormatter()
     // Error check computed variables
     var expressionHaveEnoughElement: Bool {
         return elements.count >= 3
     }
-    
     var expressionHaveResult: Bool {
-        return textView.firstIndex(of: "=") != nil
+        return text.firstIndex(of: "=") != nil
     }
     var expressionIsEmpty: Bool {
-        return textView == "0"
+        return text == "0"
     }
     var elements: [String] {
-        return textView.split(separator: " ").map { "\($0)" }
+        return text.split(separator: " ").map { "\($0)" }
     }
     var canAddOperator: Bool {
         return elements.last != "+" && elements.last != "-" && elements.last != "×" && elements.last != "÷"
     }
-    func error() {
-    }
     
     func symbolOperator(operatorTitle: String) {
-        if canAddOperator {
-            textView.append(" \(operatorTitle) ")
-            delegate?.appendText(text: " \(textView) ")
+        if expressionHaveResult {
+            text = text.components(separatedBy: "=").last!
+        }
+        if canAddOperator && text != "" {
+            text += " \(operatorTitle) "
+            delegate?.appendText(text: " \(text) ")
         } else {
             delegate?.showAlert(title: "Erreur", message: "Un opérateur est déjà mis !")
         }
     }
     func tappedNumber(textNumber: String) {
         if expressionHaveResult || expressionIsEmpty {
-            delegate?.appendText(text: "\(textNumber)")
+            text = ""
         }
-        textView.append("\(textNumber)")
-        delegate?.appendText(text: "\(textView)")
+        text += "\(textNumber)"
+        delegate?.appendText(text: "\(text)")
     }
     func calculate() {
         guard canAddOperator else {
@@ -62,12 +62,6 @@ class Algorithm {
             delegate?.showAlert(title: "Erreur", message: "Démarrez un nouveau calcul !")
             return
         }
-        numberFormatter.minimumFractionDigits = 0
-        numberFormatter.maximumFractionDigits = 4
-        numberFormatter.usesSignificantDigits = true
-        numberFormatter.alwaysShowsDecimalSeparator = false
-        numberFormatter.allowsFloats = true
-        numberFormatter.numberStyle = .decimal
         // Create local copy of operations
         var operationsToReduce = elements
         // Iterate over operations while an operand still here
@@ -88,14 +82,19 @@ class Algorithm {
         }
         let resultNumber = NSNumber(value: Double(operationsToReduce.first!)!)
         let resultString = numberFormatter.string(from: resultNumber) ?? ""
-        delegate?.appendText(text: " \(resultString)")
+        text += " = \(resultString)"
+        delegate?.appendText(text: "\(resultString)")
     }
-    
     func reset() {
-        textView.removeAll()
+        text = ""
         delegate?.appendText(text: "0")
     }
-    func priorityCalculate() {
-        
+    func decimalNumber() {
+        numberFormatter.minimumFractionDigits = 0
+        numberFormatter.maximumFractionDigits = 4
+        numberFormatter.usesSignificantDigits = true
+        numberFormatter.alwaysShowsDecimalSeparator = false
+        numberFormatter.allowsFloats = true
+        numberFormatter.numberStyle = .decimal
     }
 }
