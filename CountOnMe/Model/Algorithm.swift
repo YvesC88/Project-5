@@ -39,7 +39,11 @@ class Algorithm {
         if expressionHaveResult {
             text = text.components(separatedBy: "=").last!
         }
-        if canAddOperator && text != "" {
+        guard text != "" else {
+            delegate?.showAlert(title: "Erreur", message: "Commencez votre calcul avec un chiffre !")
+            return
+        }
+        if canAddOperator {
             text += " \(operatorTitle) "
             delegate?.appendText(text: " \(text) ")
         } else {

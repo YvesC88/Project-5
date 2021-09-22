@@ -18,21 +18,21 @@ class AlgorithmTestCase: XCTestCase {
     }
     
     func testGivenCalculate_WhenAddNumber_ThenResult() {
-        algorithm.text = "5 x 2"
+        algorithm.text = "2 + 3"
         
-        XCTAssert(algorithm.text == "5 x 2 = 10")
+        XCTAssert(algorithm.text == "2 + 3 = 5")
         
     }
     func testGivenCalculate_WhenSubstractNumber_ThenResult() {
-        algorithm.calculate()
+        algorithm.text = "2 - 3"
         
-        XCTAssert(true)
+        XCTAssert(algorithm.text == "2 - 3 = - 1")
         
     }
     func testGivenCalculate_WhenMultiplyNumber_ThenResult() {
-        algorithm.calculate()
+        algorithm.text = "2 × 3"
         
-        XCTAssert(true)
+        XCTAssert(algorithm.text == "2 × 3 = 6")
         
     }
     func testGivenCalculate_WhenDivideNumber_ThenResult() {
