@@ -49,15 +49,16 @@ class Algorithm {
         }
     }
     func tappedNumber(textNumber: String) {
-        if textNumber == "0" && text.contains("÷") {
+        if elements.last == "÷" && textNumber == "0" {
             delegate?.showAlert(title: "Erreur", message: "Impossible !")
             reset()
+        } else {
+            text += "\(textNumber)"
+            delegate?.appendText(text: "\(text)")
         }
         if expressionHaveResult || expressionIsEmpty {
             text = ""
         }
-        text += "\(textNumber)"
-        delegate?.appendText(text: "\(text)")
     }
     func calculate() {
         guard canAddOperator else {
@@ -89,6 +90,7 @@ class Algorithm {
         let resultNumber = NSNumber(value: Double(operationsToReduce.first!)!)
         let resultString = numberFormatter.string(from: resultNumber) ?? ""
         // show result
+        decimalNumber()
         text += " = \(resultString)"
         delegate?.appendText(text: "\(resultString)")
     }
@@ -98,7 +100,7 @@ class Algorithm {
     }
     func decimalNumber() {
         numberFormatter.minimumFractionDigits = 0
-        numberFormatter.maximumFractionDigits = 4
+        numberFormatter.maximumFractionDigits = 3
         numberFormatter.usesSignificantDigits = true
         numberFormatter.alwaysShowsDecimalSeparator = false
         numberFormatter.allowsFloats = true

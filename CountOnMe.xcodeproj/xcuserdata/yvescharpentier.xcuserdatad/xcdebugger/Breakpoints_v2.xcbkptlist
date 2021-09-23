@@ -19,16 +19,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "16EABB86-2ADE-4AD2-ABAD-27208024E626"
+            uuid = "106B58BB-44D5-467E-AF8F-D33A0DDB5043"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CountOnMe/Model/Algorithm.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
-            landmarkName = "tappedOperator(operatorTitle:)"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
+            landmarkName = "calculate()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

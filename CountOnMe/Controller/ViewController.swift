@@ -29,7 +29,6 @@ class ViewController: UIViewController {
         algorithm.tappedOperator(operatorTitle: sender.title(for: .normal)!)
     }
     @IBAction func tappedEqualButton(_ sender: UIButton) {
-        algorithm.decimalNumber()
         algorithm.calculate()
     }
 }
