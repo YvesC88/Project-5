@@ -14,8 +14,7 @@ protocol AlgorithmDelegate: AnyObject {
 }
 
 class Algorithm {
-    
-    var delegate: AlgorithmDelegate?
+    weak var delegate: AlgorithmDelegate?
     var text: String = ""
     var numberFormatter = NumberFormatter()
     // Error check computed variables
@@ -34,8 +33,10 @@ class Algorithm {
     var canAddOperator: Bool {
         return elements.last != "+" && elements.last != "-" && elements.last != "×" && elements.last != "÷"
     }
-    
-    func symbolOperator(operatorTitle: String) {
+    var cantDivideByZero: Bool {
+        return text.contains("÷")
+    }
+    func tappedOperator(operatorTitle: String) {
         if expressionHaveResult {
             text = text.components(separatedBy: "=").last!
         }
@@ -51,6 +52,10 @@ class Algorithm {
         }
     }
     func tappedNumber(textNumber: String) {
+        if textNumber == "0" && cantDivideByZero {
+            delegate?.showAlert(title: "Erreur", message: "Impossible !")
+            reset()
+        }
         if expressionHaveResult || expressionIsEmpty {
             text = ""
         }
@@ -86,13 +91,9 @@ class Algorithm {
         }
         let resultNumber = NSNumber(value: Double(operationsToReduce.first!)!)
         let resultString = numberFormatter.string(from: resultNumber) ?? ""
-        if text.contains("÷ 0") {
-            delegate?.showAlert(title: "Erreur", message: "Impossible !")
-            reset()
-        } else {
-            text += " = \(resultString)"
-            delegate?.appendText(text: "\(resultString)")
-        }
+        // show result
+        text += " = \(resultString)"
+        delegate?.appendText(text: "\(resultString)")
     }
     func reset() {
         text = ""
@@ -107,3 +108,10 @@ class Algorithm {
         numberFormatter.numberStyle = .decimal
     }
 }
+// text = 1 + 2 * 3
+// var result: Double
+// var leftOperation: Double
+// var rightOperation: Double
+// leftOperation = text.components(separatedBy: "+").first!
+// rightOperation = text.components(separatedBy: "+").last!
+// result = leftOperation + rightOperation
