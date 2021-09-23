@@ -33,9 +33,6 @@ class Algorithm {
     var canAddOperator: Bool {
         return elements.last != "+" && elements.last != "-" && elements.last != "×" && elements.last != "÷"
     }
-    var cantDivideByZero: Bool {
-        return text.contains("÷")
-    }
     func tappedOperator(operatorTitle: String) {
         if expressionHaveResult {
             text = text.components(separatedBy: "=").last!
@@ -52,7 +49,7 @@ class Algorithm {
         }
     }
     func tappedNumber(textNumber: String) {
-        if textNumber == "0" && cantDivideByZero {
+        if textNumber == "0" && text.contains("÷") {
             delegate?.showAlert(title: "Erreur", message: "Impossible !")
             reset()
         }
