@@ -15,7 +15,7 @@ class AlgorithmTestCase: XCTestCase {
         super.setUp()
         algorithm = Algorithm()
     }
-//    
+//
     func testGivenOperation_WhenAddNumber_ThenCalculate() {
         algorithm.text = "6 + 3"
         algorithm.calculate()

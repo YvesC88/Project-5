@@ -109,7 +109,9 @@ class Algorithm {
         numberFormatter.numberStyle = .decimal
     }
 }
-// text = 1 + 2 * 3
+
+// MARK: - Work on priority func
+// text = "1 + 2 * 3"
 // var result: Double
 // var leftOperation: Double
 // var rightOperation: Double
