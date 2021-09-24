@@ -16,6 +16,7 @@ protocol AlgorithmDelegate: AnyObject {
 class Algorithm {
     weak var delegate: AlgorithmDelegate?
     var text: String = ""
+    var resultOfDivideByZero = ""
     var numberFormatter = NumberFormatter()
     // Error check computed variables
     var expressionHaveEnoughElement: Bool {
@@ -37,7 +38,7 @@ class Algorithm {
         if expressionHaveResult {
             text = text.components(separatedBy: "=").last!
         }
-        guard text != "" else {
+        guard text != "" || operatorTitle == "-" else {
             delegate?.showAlert(title: "Erreur", message: "Commencez votre calcul avec un chiffre !")
             return
         }
@@ -50,6 +51,7 @@ class Algorithm {
     }
     func tappedNumber(textNumber: String) {
         if elements.last == "÷" && textNumber == "0" {
+            resultOfDivideByZero = "Erreur"
             delegate?.showAlert(title: "Erreur", message: "Impossible !")
             reset()
         } else {
@@ -61,6 +63,7 @@ class Algorithm {
         }
     }
     func calculate() {
+        decimalNumber()
         guard canAddOperator else {
             delegate?.showAlert(title: "Erreur", message: "Entrez une expression correcte !")
             return
@@ -90,7 +93,6 @@ class Algorithm {
         let resultNumber = NSNumber(value: Double(operationsToReduce.first!)!)
         let resultString = numberFormatter.string(from: resultNumber) ?? ""
         // show result
-        decimalNumber()
         text += " = \(resultString)"
         delegate?.appendText(text: "\(resultString)")
     }

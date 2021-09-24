@@ -15,29 +15,46 @@ class AlgorithmTestCase: XCTestCase {
         super.setUp()
         algorithm = Algorithm()
     }
-    func testGivenCalculate_WhenAddNumber_ThenResult() {
-        algorithm.text = "2 + 3"
-        
-        XCTAssert(algorithm.text == "2 + 3 = 5")
-
-    }
-    func testGivenCalculate_WhenSubstractNumber_ThenResult() {
-        algorithm.text = "2 - 3"
-        
-        XCTAssert(algorithm.text == "2 - 3 = - 1")
-        
-    }
-    func testGivenCalculate_WhenMultiplyNumber_ThenResult() {
-        algorithm.text = "2 × 3"
-        
-        XCTAssert(algorithm.text == "2 × 3 = 6")
-        
-    }
-    func testGivenCalculate_WhenDivideNumber_ThenResult() {
+//    
+    func testGivenOperation_WhenAddNumber_ThenCalculate() {
+        algorithm.text = "6 + 3"
         algorithm.calculate()
         
-        XCTAssert(true)
-        
+        XCTAssert(algorithm.text == "6 + 3 = 9")
     }
-
+    func testGivenOperation_WhenSubstractNumber_ThenCalculate() {
+        algorithm.text = "6 - 3"
+        algorithm.calculate()
+        
+        XCTAssert(algorithm.text == "6 - 3 = 3")
+    }
+    func testGivenOperation_WhenMultiplyNumber_ThenCalculate() {
+        algorithm.text = "6 × 3"
+        algorithm.calculate()
+        
+        XCTAssert(algorithm.text == "6 × 3 = 18")
+    }
+    func testGivenOperation_WhenDivideNumber_ThenCalculate() {
+        algorithm.text = "6 ÷ 3"
+        algorithm.calculate()
+        
+        XCTAssert(algorithm.text == "6 ÷ 3 = 2")
+    }
+    func testGivenDivide_WhenDivideNumber_ThenDecimalNumber() {
+        algorithm.text = "3 ÷ 6"
+        algorithm.calculate()
+        
+        XCTAssert(algorithm.text == "3 ÷ 6 = 0.5")
+    }
+    func testCleanText_WhenTappedOnAC_ThenCleaned() {
+        algorithm.reset()
+        
+        XCTAssert(algorithm.text == "")
+    }
+    func testGivenOperation_WhenDivideByZero_ThenError() {
+        algorithm.text = "2 ÷"
+        algorithm.tappedNumber(textNumber: "0")
+        
+        XCTAssert(algorithm.resultOfDivideByZero == "Erreur")
+    }
 }
