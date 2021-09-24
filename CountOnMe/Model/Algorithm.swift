@@ -50,6 +50,9 @@ class Algorithm {
         }
     }
     func tappedNumber(textNumber: String) {
+        if expressionHaveResult || expressionIsEmpty {
+            text = ""
+        }
         if elements.last == "÷" && textNumber == "0" {
             resultOfDivideByZero = "Erreur"
             delegate?.showAlert(title: "Erreur", message: "Impossible !")
@@ -58,9 +61,7 @@ class Algorithm {
             text += "\(textNumber)"
             delegate?.appendText(text: "\(text)")
         }
-        if expressionHaveResult || expressionIsEmpty {
-            text = ""
-        }
+        
     }
     func calculate() {
         decimalNumber()
