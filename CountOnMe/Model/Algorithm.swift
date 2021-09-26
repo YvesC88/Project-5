@@ -43,8 +43,8 @@ class Algorithm {
             return
         }
         if canAddOperator {
-            text += "\(operatorTitle)"
-            delegate?.appendText(text: "\(text)")
+            text += " \(operatorTitle) "
+            delegate?.appendText(text: " \(text) ")
         } else {
             delegate?.showAlert(title: "Erreur", message: "Un opérateur est déjà mis !")
         }
@@ -59,8 +59,8 @@ class Algorithm {
             reset()
         } else {
 //            decimalNumber()
-            text += " \(textNumber) "
-            delegate?.appendText(text: " \(text) ")
+            text += "\(textNumber)"
+            delegate?.appendText(text: "\(text)")
         }
         
     }
