@@ -39,12 +39,12 @@ class Algorithm {
             text = text.components(separatedBy: "=").last!
         }
         guard text != "" || operatorTitle == "-" else {
-            delegate?.showAlert(title: "Erreur", message: "Commencez votre calcul avec un chiffre !")
+            delegate?.showAlert(title: "Erreur", message: "Entrez une expression correcte !")
             return
         }
         if canAddOperator {
-            text += " \(operatorTitle) "
-            delegate?.appendText(text: " \(text) ")
+            text += "\(operatorTitle)"
+            delegate?.appendText(text: "\(text)")
         } else {
             delegate?.showAlert(title: "Erreur", message: "Un opérateur est déjà mis !")
         }
@@ -58,13 +58,13 @@ class Algorithm {
             delegate?.showAlert(title: "Erreur", message: "Impossible !")
             reset()
         } else {
-            text += "\(textNumber)"
-            delegate?.appendText(text: "\(text)")
+//            decimalNumber()
+            text += " \(textNumber) "
+            delegate?.appendText(text: " \(text) ")
         }
         
     }
     func calculate() {
-        decimalNumber()
         guard canAddOperator else {
             delegate?.showAlert(title: "Erreur", message: "Entrez une expression correcte !")
             return
@@ -94,8 +94,8 @@ class Algorithm {
         let resultNumber = NSNumber(value: Double(operationsToReduce.first!)!)
         let resultString = numberFormatter.string(from: resultNumber) ?? ""
         // show result
-        text += " = \(resultString)"
-        delegate?.appendText(text: "\(resultString)")
+        text += " = \(resultString) "
+        delegate?.appendText(text: " \(resultString) ")
     }
     func reset() {
         text = ""
