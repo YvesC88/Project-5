@@ -31,12 +31,19 @@ class Algorithm {
     var canAddOperator: Bool {
         return elements.last != "+" && elements.last != "-" && elements.last != "×" && elements.last != "÷"
     }
+    var canAddNegativeSign: Bool {
+        return elements.last != "-"
+    }
     func tappedOperator(operatorTitle: String) {
         if text != "" {
             if canAddOperator {
-            text += " \(operatorTitle) "
-            delegate?.appendText(text: " \(text) ")
-            solvedOperation = false
+                text += " \(operatorTitle) "
+                delegate?.appendText(text: " \(text) ")
+                solvedOperation = false
+            } else if operatorTitle == "-" && canAddNegativeSign {
+                text += "\(operatorTitle)"
+                delegate?.appendText(text: "\(text)")
+                solvedOperation = false
             } else {
                 delegate?.showAlert(title: "Erreur", message: "Un opérateur est déjà mis !")
             }
