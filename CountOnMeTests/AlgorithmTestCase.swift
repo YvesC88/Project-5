@@ -59,12 +59,13 @@ class AlgorithmTestCase: XCTestCase {
         
         XCTAssert(algorithm.text == "2")
     }
-//    func testGivenDivide_WhenDivideNumber_ThenDecimalNumber() {
-//        algorithm.text = "3 ÷ 6"
-//        algorithm.calculate()
-//
-//        XCTAssert(algorithm.text == "0.5")
-//    }
+    func testGivenDivide_WhenDivideNumber_ThenDecimalNumber() {
+        algorithm.text = "3 ÷ 6"
+        algorithm.decimalNumber()
+        algorithm.calculate()
+        
+        XCTAssert(algorithm.text == "0.5")
+    }
     func testCleanText_WhenTappedOnAC_ThenCleaned() {
         algorithm.reset()
         
