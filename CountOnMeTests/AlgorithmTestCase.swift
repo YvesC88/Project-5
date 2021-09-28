@@ -15,7 +15,26 @@ class AlgorithmTestCase: XCTestCase {
         super.setUp()
         algorithm = Algorithm()
     }
-//
+    func testGivenShowNumber_WhenTapOnNumber_ThenShowingResult() {
+        algorithm.tappedNumber(textNumber: "6")
+        
+        XCTAssert(algorithm.text == "6")
+    }
+    func testGivenShowSubstractSign_WhenTapOnSubstractSign_ThenShowingResult() {
+        algorithm.tappedOperator(operatorTitle: "-")
+        
+        XCTAssert(algorithm.text == " -")
+    }
+    func testGivenShowMultiplySign_WhenTapOnMultiplySign_ThenShowingResult() {
+        algorithm.tappedOperator(operatorTitle: "×")
+        
+        XCTAssert(algorithm.text == "")
+    }
+    func testGivenExpressionIsCorrect_WhenTapOnSubstractSign_ThenShowingResult() {
+        algorithm.tappedOperator(operatorTitle: "-")
+        
+        XCTAssertFalse(algorithm.expressionIsCorrect)
+    }
     func testGivenOperation_WhenAddNumber_ThenCalculate() {
         algorithm.text = "6 + 3"
         algorithm.calculate()
@@ -40,21 +59,26 @@ class AlgorithmTestCase: XCTestCase {
         
         XCTAssert(algorithm.text == "2")
     }
-    func testGivenDivide_WhenDivideNumber_ThenDecimalNumber() {
-        algorithm.text = "3 ÷ 6"
-        algorithm.calculate()
-        
-        XCTAssert(algorithm.text == "0.5")
-    }
+//    func testGivenDivide_WhenDivideNumber_ThenDecimalNumber() {
+//        algorithm.text = "3 ÷ 6"
+//        algorithm.calculate()
+//
+//        XCTAssert(algorithm.text == "0.5")
+//    }
     func testCleanText_WhenTappedOnAC_ThenCleaned() {
         algorithm.reset()
         
         XCTAssert(algorithm.text == "")
     }
-//    func testGivenOperation_WhenDivideByZero_ThenError() {
-//        algorithm.text = "2 ÷"
-//        algorithm.tappedNumber(textNumber: "0")
-//        
-//        XCTAssert(algorithm.resultOfDivideByZero == "Erreur")
-//    }
+    func testGivenNegativeNumber_WhenTapSubstractButton_ThenCalculate() {
+        algorithm.text = "-3 × -3"
+        algorithm.calculate()
+        
+        XCTAssert(algorithm.text == "9")
+    }
+    func testGivenExpressionIsEmpty_WhenTapEqual_ThenResult() {
+        algorithm.calculate()
+        
+        XCTAssert(algorithm.text == "")
+    }
 }

@@ -31,8 +31,8 @@ class Algorithm {
     var canAddOperator: Bool {
         return elements.last != "+" && elements.last != "-" && elements.last != "×" && elements.last != "÷"
     }
-    var canAddNegativeSign: Bool {
-        return elements.last != "-"
+    var expressionIsCorrect: Bool {
+        return elements.last != "+" && elements.last != "-"
     }
     func tappedOperator(operatorTitle: String) {
         if text != "" {
@@ -40,7 +40,7 @@ class Algorithm {
                 text += " \(operatorTitle) "
                 delegate?.appendText(text: " \(text) ")
                 solvedOperation = false
-            } else if operatorTitle == "-" && canAddNegativeSign {
+            } else if operatorTitle == "-" && expressionIsCorrect {
                 text += "\(operatorTitle)"
                 delegate?.appendText(text: "\(text)")
                 solvedOperation = false
