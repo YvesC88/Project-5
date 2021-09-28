@@ -20,41 +20,41 @@ class AlgorithmTestCase: XCTestCase {
         algorithm.text = "6 + 3"
         algorithm.calculate()
         
-        XCTAssert(algorithm.text == "6 + 3 = 9")
+        XCTAssert(algorithm.text == "9")
     }
     func testGivenOperation_WhenSubstractNumber_ThenCalculate() {
         algorithm.text = "6 - 3"
         algorithm.calculate()
         
-        XCTAssert(algorithm.text == "6 - 3 = 3")
+        XCTAssert(algorithm.text == "3")
     }
     func testGivenOperation_WhenMultiplyNumber_ThenCalculate() {
         algorithm.text = "6 × 3"
         algorithm.calculate()
         
-        XCTAssert(algorithm.text == "6 × 3 = 18")
+        XCTAssert(algorithm.text == "18")
     }
     func testGivenOperation_WhenDivideNumber_ThenCalculate() {
         algorithm.text = "6 ÷ 3"
         algorithm.calculate()
         
-        XCTAssert(algorithm.text == "6 ÷ 3 = 2")
+        XCTAssert(algorithm.text == "2")
     }
     func testGivenDivide_WhenDivideNumber_ThenDecimalNumber() {
         algorithm.text = "3 ÷ 6"
         algorithm.calculate()
         
-        XCTAssert(algorithm.text == "3 ÷ 6 = 0.5")
+        XCTAssert(algorithm.text == "0.5")
     }
     func testCleanText_WhenTappedOnAC_ThenCleaned() {
         algorithm.reset()
         
         XCTAssert(algorithm.text == "")
     }
-    func testGivenOperation_WhenDivideByZero_ThenError() {
-        algorithm.text = "2 ÷"
-        algorithm.tappedNumber(textNumber: "0")
-        
-        XCTAssert(algorithm.resultOfDivideByZero == "Erreur")
-    }
+//    func testGivenOperation_WhenDivideByZero_ThenError() {
+//        algorithm.text = "2 ÷"
+//        algorithm.tappedNumber(textNumber: "0")
+//        
+//        XCTAssert(algorithm.resultOfDivideByZero == "Erreur")
+//    }
 }

@@ -16,14 +16,11 @@ protocol AlgorithmDelegate: AnyObject {
 class Algorithm {
     weak var delegate: AlgorithmDelegate?
     var text: String = ""
-    var resultOfDivideByZero = ""
+    var solvedOperation: Bool = false
     var numberFormatter = NumberFormatter()
     // Error check computed variables
     var expressionHaveEnoughElement: Bool {
         return elements.count >= 3
-    }
-    var expressionHaveResult: Bool {
-        return text.firstIndex(of: "=") != nil
     }
     var expressionIsEmpty: Bool {
         return text == "0"
@@ -35,44 +32,42 @@ class Algorithm {
         return elements.last != "+" && elements.last != "-" && elements.last != "×" && elements.last != "÷"
     }
     func tappedOperator(operatorTitle: String) {
-        if expressionHaveResult {
-            text = text.components(separatedBy: "=").last!
-        }
-        guard text != "" || operatorTitle == "-" else {
-            delegate?.showAlert(title: "Erreur", message: "Entrez une expression correcte !")
-            return
-        }
-        if canAddOperator {
+        if text != "" {
+            if canAddOperator {
             text += " \(operatorTitle) "
             delegate?.appendText(text: " \(text) ")
+            solvedOperation = false
+            } else {
+                delegate?.showAlert(title: "Erreur", message: "Un opérateur est déjà mis !")
+            }
+        } else if operatorTitle == "-" {
+            text += " \(operatorTitle)"
+            delegate?.appendText(text: " \(text)")
+            solvedOperation = false
         } else {
-            delegate?.showAlert(title: "Erreur", message: "Un opérateur est déjà mis !")
+            delegate?.showAlert(title: "Erreur", message: "Entrez une expression correcte !")
         }
     }
     func tappedNumber(textNumber: String) {
-        if expressionHaveResult || expressionIsEmpty {
+        if solvedOperation == true || expressionIsEmpty {
             text = ""
         }
         if elements.last == "÷" && textNumber == "0" {
-            resultOfDivideByZero = "Erreur"
             delegate?.showAlert(title: "Erreur", message: "Impossible !")
             reset()
         } else {
-//            decimalNumber()
+            decimalNumber()
             text += "\(textNumber)"
             delegate?.appendText(text: "\(text)")
+            solvedOperation = false
         }
-        
     }
     func calculate() {
         guard canAddOperator else {
             delegate?.showAlert(title: "Erreur", message: "Entrez une expression correcte !")
             return
         }
-        guard expressionHaveEnoughElement else {
-            delegate?.showAlert(title: "Erreur", message: "Démarrez un nouveau calcul !")
-            return
-        }
+        guard expressionHaveEnoughElement else { return }
         // Create local copy of operations
         var operationsToReduce = elements
         // Iterate over operations while an operand still here
@@ -94,8 +89,9 @@ class Algorithm {
         let resultNumber = NSNumber(value: Double(operationsToReduce.first!)!)
         let resultString = numberFormatter.string(from: resultNumber) ?? ""
         // show result
-        text += " = \(resultString) "
-        delegate?.appendText(text: " \(resultString) ")
+        text = "\(resultString)"
+        delegate?.appendText(text: " \(resultString)")
+        solvedOperation = true
     }
     func reset() {
         text = ""
@@ -108,14 +104,6 @@ class Algorithm {
         numberFormatter.alwaysShowsDecimalSeparator = false
         numberFormatter.allowsFloats = true
         numberFormatter.numberStyle = .decimal
+        numberFormatter.usesGroupingSeparator = false
     }
 }
-
-// MARK: - Work on priority func
-// text = "1 + 2 * 3"
-// var result: Double
-// var leftOperation: Double
-// var rightOperation: Double
-// leftOperation = text.components(separatedBy: "+").first!
-// rightOperation = text.components(separatedBy: "+").last!
-// result = leftOperation + rightOperation
