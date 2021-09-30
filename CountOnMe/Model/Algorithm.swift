@@ -79,9 +79,21 @@ class Algorithm {
         var operationsToReduce = elements
         // Iterate over operations while an operand still here
         while operationsToReduce.count > 1 {
-            let left = Double(operationsToReduce[0])!
-            let operand = operationsToReduce[1]
-            let right = Double(operationsToReduce[2])!
+            let indexOfMultiply = operationsToReduce.firstIndex { $0 == "×" }
+            let indexOfDivide = operationsToReduce.firstIndex { $0 == "÷" }
+            let operationIndex: Int
+            if indexOfMultiply != nil && indexOfDivide == nil {
+                operationIndex = indexOfMultiply!
+            } else if indexOfMultiply == nil && indexOfDivide != nil {
+                operationIndex = indexOfDivide!
+            } else if indexOfMultiply != nil && indexOfDivide != nil {
+                operationIndex = min(indexOfMultiply!, indexOfDivide!)
+            } else {
+                operationIndex = 1
+            }
+            let left = Double(operationsToReduce[operationIndex - 1])!
+            let operand = operationsToReduce[operationIndex]
+            let right = Double(operationsToReduce[operationIndex + 1])!
             var result: Double
             switch operand {
             case "+": result = left + right
@@ -90,8 +102,10 @@ class Algorithm {
             case "÷": result = left / right
             default: fatalError("Unknown operator !")
             }
-            operationsToReduce = Array(operationsToReduce.dropFirst(3))
-            operationsToReduce.insert("\(result)", at: 0)
+            operationsToReduce.remove(at: operationIndex + 1)
+            operationsToReduce.remove(at: operationIndex)
+            operationsToReduce.remove(at: operationIndex - 1)
+            operationsToReduce.insert("\(result)", at: operationIndex - 1)
         }
         let resultNumber = NSNumber(value: Double(operationsToReduce.first!)!)
         let resultString = numberFormatter.string(from: resultNumber) ?? ""
