@@ -17,6 +17,8 @@ class Algorithm {
     weak var delegate: AlgorithmDelegate?
     var text: String = ""
     var solvedOperation: Bool = false
+    var canDivideByZero: Bool = false
+    var canCalculateByNothing: Bool = false
     var numberFormatter = NumberFormatter()
     // Error check computed variables
     var expressionHaveEnoughElement: Bool {
@@ -61,6 +63,7 @@ class Algorithm {
         }
         if elements.last == "÷" && textNumber == "0" {
             delegate?.showAlert(title: "Erreur", message: "Impossible !")
+            canDivideByZero = false
             reset()
         } else {
             decimalNumber()
@@ -72,6 +75,7 @@ class Algorithm {
     func calculate() {
         guard canAddOperator else {
             delegate?.showAlert(title: "Erreur", message: "Entrez une expression correcte !")
+            canCalculateByNothing = false
             return
         }
         guard expressionHaveEnoughElement else { return }

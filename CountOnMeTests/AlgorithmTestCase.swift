@@ -20,6 +20,13 @@ class AlgorithmTestCase: XCTestCase {
         
         XCTAssert(algorithm.text == "6")
     }
+    func testGivenShowNegativeNumber_WhenTapOnNumber_ThenShowingResult() {
+        algorithm.tappedNumber(textNumber: "3")
+        algorithm.tappedOperator(operatorTitle: "×")
+        algorithm.tappedOperator(operatorTitle: "-")
+        
+        XCTAssert(algorithm.text == "3 × -")
+    }
     func testGivenShowSubstractSign_WhenTapOnSubstractSign_ThenShowingResult() {
         algorithm.tappedOperator(operatorTitle: "-")
         
@@ -29,6 +36,13 @@ class AlgorithmTestCase: XCTestCase {
         algorithm.tappedOperator(operatorTitle: "×")
         
         XCTAssert(algorithm.text == "")
+    }
+    func testGivenTryToAddTwoSymbolsInARow_WhenTapOnNumberAndTwoSymbols_ThenImpossible() {
+        algorithm.tappedNumber(textNumber: "3")
+        algorithm.tappedOperator(operatorTitle: "-")
+        algorithm.tappedOperator(operatorTitle: "÷")
+        
+        XCTAssert(algorithm.text == "3 - ")
     }
     func testGivenExpressionIsCorrect_WhenTapOnSubstractSign_ThenShowingResult() {
         algorithm.tappedOperator(operatorTitle: "-")
@@ -81,5 +95,32 @@ class AlgorithmTestCase: XCTestCase {
         algorithm.calculate()
         
         XCTAssert(algorithm.text == "")
+    }
+    func testGivenDivide_WhenByZero_ThenError() {
+        algorithm.tappedNumber(textNumber: "3")
+        algorithm.tappedOperator(operatorTitle: "÷")
+        algorithm.tappedNumber(textNumber: "0")
+        
+        XCTAssertFalse(algorithm.canDivideByZero)
+    }
+    func testGivenHaveAResult_WhenTapOnNumber_ThenTextClean() {
+        algorithm.text = "6 + 3"
+        algorithm.calculate()
+        algorithm.tappedNumber(textNumber: "6")
+        
+        XCTAssertEqual(algorithm.solvedOperation, algorithm.text == "")
+    }
+    func testGivenCalculate_WhenCanCalculateByNothing_ThenError() {
+        algorithm.text = "6 + "
+        algorithm.calculate()
+        
+        XCTAssertFalse(algorithm.canCalculateByNothing)
+    }
+    func testGivenPriorityCalculate_WhenHaveMultiplyAndDivide_ThenResult() {
+        algorithm.text = "1 + 2 × 3 ÷ 4"
+        algorithm.decimalNumber()
+        algorithm.calculate()
+        
+        XCTAssert(algorithm.text == "2.5")
     }
 }
