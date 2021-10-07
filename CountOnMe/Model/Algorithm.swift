@@ -14,7 +14,10 @@ protocol AlgorithmDelegate: AnyObject {
 }
 
 class Algorithm {
+    // declaration of var & let
     weak var delegate: AlgorithmDelegate?
+    let error: String = "Erreur"
+    let errorMessage: String = "Entrez une expression correcte !"
     var text: String = ""
     var solvedOperation: Bool = false
     var canDivideByZero: Bool = false
@@ -33,28 +36,31 @@ class Algorithm {
     var canAddOperator: Bool {
         return elements.last != "+" && elements.last != "-" && elements.last != "×" && elements.last != "÷"
     }
-    var expressionIsCorrect: Bool {
+    var isLastElementMultiplyOrDivide: Bool {
         return elements.last != "+" && elements.last != "-"
     }
+    var textIsNotEmpty: Bool {
+        return text != ""
+    }
     func tappedOperator(operatorTitle: String) {
-        if text != "" {
+        if textIsNotEmpty {
             if canAddOperator {
                 text += " \(operatorTitle) "
                 delegate?.appendText(text: " \(text) ")
                 solvedOperation = false
-            } else if operatorTitle == "-" && expressionIsCorrect {
+            } else if operatorTitle == "-" && isLastElementMultiplyOrDivide {
                 text += "\(operatorTitle)"
                 delegate?.appendText(text: "\(text)")
                 solvedOperation = false
             } else {
-                delegate?.showAlert(title: "Erreur", message: "Un opérateur est déjà mis !")
+                delegate?.showAlert(title: error, message: "Un opérateur est déjà mis !")
             }
         } else if operatorTitle == "-" {
             text += " \(operatorTitle)"
             delegate?.appendText(text: " \(text)")
             solvedOperation = false
         } else {
-            delegate?.showAlert(title: "Erreur", message: "Entrez une expression correcte !")
+            delegate?.showAlert(title: error, message: errorMessage)
         }
     }
     func tappedNumber(textNumber: String) {
@@ -62,7 +68,7 @@ class Algorithm {
             text = ""
         }
         if elements.last == "÷" && textNumber == "0" {
-            delegate?.showAlert(title: "Erreur", message: "Impossible !")
+            delegate?.showAlert(title: error, message: "Impossible !")
             canDivideByZero = false
             reset()
         } else {
@@ -74,7 +80,7 @@ class Algorithm {
     }
     func calculate() {
         guard canAddOperator else {
-            delegate?.showAlert(title: "Erreur", message: "Entrez une expression correcte !")
+            delegate?.showAlert(title: error, message: errorMessage)
             canCalculateByNothing = false
             return
         }
@@ -83,17 +89,16 @@ class Algorithm {
         var operationsToReduce = elements
         // Iterate over operations while an operand still here
         while operationsToReduce.count > 1 {
+        // Rules of priority on calculation
             let indexOfMultiply = operationsToReduce.firstIndex { $0 == "×" }
             let indexOfDivide = operationsToReduce.firstIndex { $0 == "÷" }
-            let operationIndex: Int
+            var operationIndex = 1
             if indexOfMultiply != nil && indexOfDivide == nil {
                 operationIndex = indexOfMultiply!
             } else if indexOfMultiply == nil && indexOfDivide != nil {
                 operationIndex = indexOfDivide!
             } else if indexOfMultiply != nil && indexOfDivide != nil {
                 operationIndex = min(indexOfMultiply!, indexOfDivide!)
-            } else {
-                operationIndex = 1
             }
             let left = Double(operationsToReduce[operationIndex - 1])!
             let operand = operationsToReduce[operationIndex]
@@ -113,7 +118,7 @@ class Algorithm {
         }
         let resultNumber = NSNumber(value: Double(operationsToReduce.first!)!)
         let resultString = numberFormatter.string(from: resultNumber) ?? ""
-        // show result
+        // Show result
         text = "\(resultString)"
         delegate?.appendText(text: " \(resultString)")
         solvedOperation = true
