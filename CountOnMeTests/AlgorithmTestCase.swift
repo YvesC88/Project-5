@@ -78,11 +78,6 @@ class AlgorithmTestCase: XCTestCase {
         
         XCTAssert(algorithm.text == " -")
     }
-    func testGivenShowMultiplySign_WhenTapOnMultiplySign_ThenShowingResult() {
-        algorithm.tappedOperator(operatorTitle: "×")
-        
-        XCTAssert(algorithm.text == "")
-    }
     func testGivenExpressionIsCorrect_WhenTapOnSubstractSign_ThenShowingResult() {
         algorithm.tappedOperator(operatorTitle: "-")
         
@@ -108,6 +103,11 @@ class AlgorithmTestCase: XCTestCase {
         algorithm.tappedOperator(operatorTitle: "÷")
         
         XCTAssert(algorithm.text == "3 - ")
+    }
+    func testGivenShowMultiplySign_WhenTapOnMultiplySign_ThenShowingResult() {
+        algorithm.tappedOperator(operatorTitle: "×")
+        
+        XCTAssert(algorithm.text == "")
     }
     // MARK: - Text clean and other
     func testCleanText_WhenTappedOnAC_ThenTextCleaned() {
