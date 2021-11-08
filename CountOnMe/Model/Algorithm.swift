@@ -42,6 +42,7 @@ class Algorithm {
     var textIsNotEmpty: Bool {
         return text != ""
     }
+    
     func tappedOperator(operatorTitle: String) {
         if textIsNotEmpty {
             if canAddOperator {
@@ -63,6 +64,7 @@ class Algorithm {
             delegate?.showAlert(title: error, message: errorMessage)
         }
     }
+    
     func tappedNumber(textNumber: String) {
         if solvedOperation == true || expressionIsEmpty {
             text = ""
@@ -78,6 +80,7 @@ class Algorithm {
             solvedOperation = false
         }
     }
+    
     func calculate() {
         guard canAddOperator else {
             delegate?.showAlert(title: error, message: errorMessage)
@@ -89,7 +92,7 @@ class Algorithm {
         var operationsToReduce = elements
         // Iterate over operations while an operand still here
         while operationsToReduce.count > 1 {
-        // Rules of priority on calculation
+            // Rules of priority on calculation
             let indexOfMultiply = operationsToReduce.firstIndex { $0 == "×" }
             let indexOfDivide = operationsToReduce.firstIndex { $0 == "÷" }
             var operationIndex = 1
@@ -111,10 +114,7 @@ class Algorithm {
             case "÷": result = left / right
             default: fatalError("Unknown operator !")
             }
-            operationsToReduce.remove(at: operationIndex + 1)
-            operationsToReduce.remove(at: operationIndex)
-            operationsToReduce.remove(at: operationIndex - 1)
-            operationsToReduce.insert("\(result)", at: operationIndex - 1)
+            operationsToReduce.replaceSubrange((operationIndex - 1)...(operationIndex + 1), with: ["\(result)"])
         }
         let resultNumber = NSNumber(value: Double(operationsToReduce.first!)!)
         let resultString = numberFormatter.string(from: resultNumber) ?? ""

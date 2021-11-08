@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    private var algorithm = Algorithm()
+    private let algorithm = Algorithm()
     @IBOutlet var textView: UITextView!
     @IBOutlet var numberButtons: [UIButton]!
     @IBOutlet var resetOperations: UIButton!
