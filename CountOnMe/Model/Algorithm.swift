@@ -69,16 +69,16 @@ class Algorithm {
         if solvedOperation == true || expressionIsEmpty {
             text = ""
         }
-        if elements.last == "÷" && textNumber == "0" {
-            delegate?.showAlert(title: error, message: "Impossible !")
-            canDivideByZero = false
-            reset()
-        } else {
+        guard elements.last == "÷" && textNumber == "0" else {
             decimalNumber()
             text += "\(textNumber)"
             delegate?.appendText(text: "\(text)")
             solvedOperation = false
+            return
         }
+        delegate?.showAlert(title: error, message: "Impossible !")
+        canDivideByZero = false
+        reset()
     }
     
     func calculate() {
@@ -124,7 +124,7 @@ class Algorithm {
         solvedOperation = true
     }
     func reset() {
-        text = ""
+        text.removeAll()
         delegate?.appendText(text: "0")
     }
     func decimalNumber() {
